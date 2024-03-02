@@ -3,21 +3,23 @@ public class Media {
     private String auteur;
     private String ISBN;
     private double price;
-    private String mediaType;
+//    private String mediaType;
 
-    public Media(String title,String auteur,String ISBN,double price,String mediaType){
+//    public Media(String title,String auteur,String ISBN,double price,String mediaType){
+//        this.title=title;
+//        this.auteur=auteur;
+//        this.ISBN=ISBN;
+//        this.price=price;
+////        this.mediaType=mediaType;
+//  }
+
+    public Media() {}
+
+    public Media(String title, String auteur, String ISBN, double price) {
         this.title=title;
         this.auteur=auteur;
         this.ISBN=ISBN;
         this.price=price;
-        this.mediaType=mediaType;
-    }
-
-    public Media() {
-
-    }
-
-    public Media(String title, String auteur, String isbn, double price) {
     }
 
     public String getTitle() {
@@ -52,11 +54,7 @@ public class Media {
         this.price = price;
     }
     public String getMediaType(){
-        return mediaType;
-    }
-
-    public void setMediaType(String mediaType) {
-        this.mediaType = mediaType;
+        return "Media";
     }
 
     public String toString() {

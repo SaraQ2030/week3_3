@@ -1,8 +1,8 @@
 public class AcademicBook extends Book {
     private String subject;
 
-    public AcademicBook(String title, String autuer, String ISBN, double price, int stock, Review[] reviews) {
-        super(title, autuer, ISBN, price, stock, reviews);
+    public AcademicBook(String title, String autuer, String ISBN, double price, int stock, String subject) {
+        super(title, autuer, ISBN, price, stock);
         this.subject = subject;
     }
 
@@ -17,7 +17,7 @@ public class AcademicBook extends Book {
 
     @Override
     public String getMediaType() {
-        if (getAverageRating() >= 4.5) {
+        if (isBestseller()) {
             return "Bestselling AcademicBook";
         } else {
             return "AcademicBook";
@@ -30,7 +30,5 @@ public class AcademicBook extends Book {
     public String toString() {
         return super.toString() + "\nSubject: " + subject;
     }
-//    private double getAverageRating() {
-//
-//    }
+
 }

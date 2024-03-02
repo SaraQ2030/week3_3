@@ -4,42 +4,49 @@ public class Main {
     public static void main(String[] args) {
 User user=new User();
 
-        // Create instances of various books, movies, and music items
-        Book book1 = new Book("Book1", "asfddre", "978074", 12.99, 100, new Review[]{new Review("user1", "Great book!", "5"), new Review("user2", "Enjoyed reading it", "4")});
-        Book book2 = new Book("book2", "Harper Lee", "9780061120084", 10.50, 150, new Review[]{new Review("user3", "Good", "4"), new Review("user4", "Highly recommended", "5")});
 
-        Movie movie1 = new Movie("movie1", "auteur1", "9780123456789", 14.99, 148, "Movie");
-        Movie movie2 = new Movie("movie2 ", "auteur2", "9780790731953", 9.99, 80, "Movie");
+        Book book1 = new Book("book 1", "Frank", "9780743273565", 15.99, 10);
+        Book book2 = new Novel("Novel 1", "lew", "9780061120084", 12.50, 15, "fancy");
+        Book book3 = new AcademicBook("Computer", "joe", "9780262033848", 75.00, 5, "Science");
+        Movie movie1 = new Movie("Taken", "Can", "9780783229744", 9.99, 148);
+        Music music1 = new Music("song", "meme", "9780769200135", 1.29);
 
-            Music music1 = new Music("song1", "auteur1", "9780903284", 0.99, "song");
-            Music music2 = new Music("song2", "auteur2", "9781432119703", 1.29, "song");
+            //  review
+//            Review review = new Review("Frank", "This book is amazing!", 5);
+//            book1.addReview(review);
 
-        Novel novel1 = new Novel("novel1", "George Orwell", "9780451524935", 9.95, 200, new Review[]{new Review("user5", "Dystopian masterpiece", "5"), new Review("user6", "Thought-provoking", "4.5")}, "Dystopian");
-        AcademicBook academicBook1 = new AcademicBook("Introduction to Algorithms", "Thomas H. Cormen", "9780262033848", 80.50, 500, new Review[]{new Review("user7", "Comprehensive guide", "4.5"), new Review("user8", "Excellent textbook", "5")});
-
-        // Create a store
         Store store = new Store();
-
-        // Add media to the media list
         store.addMedia(book1);
         store.addMedia(book2);
+        store.addMedia(book3);
         store.addMedia(movie1);
-        store.addMedia(movie2);
         store.addMedia(music1);
-        store.addMedia(music2);
-        store.addMedia(novel1);
-        store.addMedia(academicBook1);
 
-        // Display media list
-        System.out.println("Store's Available Media List:");
-        ArrayList<Media> availableMedia = store.displayMedia();
-        for (Media media : availableMedia) {
-            System.out.println(media);
+
+        User user1 = new User("user1", "user1@example.com");
+
+        // Add to the user's shopping cart
+        user1.addToCart(book1);
+        user1.addToCart(movie1);
+
+        // Remove from shopping cart
+        user1.removeFromCart(book1);
+
+        // Complete purchase
+        user1.checkout();
+
+        // Display available medias and registered users
+        store.displayMedia();
+        store.displayUsers();
+
+        // Test searchBook method
+        Book foundBook = (Book) store.searchBook("book 1");
+        if (foundBook != null) {
+            System.out.println("Found Book: " + foundBook);
+        } else {
+            System.out.println("Book not found.");
         }
-
-
-
-
-
     }
 }
+
+

@@ -1,14 +1,16 @@
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+
 public class Book extends Media {
         private int stock;
-        private Review[] reviews;
-        private double averageRating;
+        private ArrayList<Review> reviews;
 
-        public Book(String title, String autuer, String ISBN, double price, int stock, Review[] reviews) {
+
+        public Book(String title, String autuer, String ISBN, double price, int stock) {
             super(title, autuer, ISBN, price);
             this.stock = stock;
-            this.reviews = reviews;
-            this.averageRating = calculateAverageRating();
+           this.reviews=new ArrayList<>();
         }
 
         public int getStock() {
@@ -19,41 +21,40 @@ public class Book extends Media {
             this.stock = stock;
         }
 
-        public Review[] getReviews() {
-            return reviews;
-        }
+        public void addReview(Review review) {
 
-        public void setReviews(Review[] reviews) {
-            this.reviews = reviews;
-            this.averageRating = calculateAverageRating();
+            reviews.add(review);
         }
 
 
-        public void addReview(Review r) {
-            //
-            Review[] newReviews = Arrays.copyOf(reviews, reviews.length + 1);
-            newReviews[newReviews.length - 1] = r;
-            this.reviews = newReviews;
-            this.averageRating = calculateAverageRating();
+    public double getAverageRating() {
+        if (reviews.isEmpty()) return 0.0;
+        double sum = 0.0;
+        for (Review review : reviews) {
+            sum += review.getRating();
         }
+        return sum / reviews.size();
+    }
 
 
-        public double calculateAverageRating() {
-            if (reviews == null || reviews.length == 0) {
-                return 0;
-            }
-            double sum = 0;
-            for (Review review : reviews) {
-                sum += Double.parseDouble(review.getRating());
-            }
-            return sum / reviews.length; // Calculate the average rating
-        }
+    public void purchase(User user) {
+        user.addToCart(this);
+       stock--;
+    }
+    public boolean isBestseller() {
+        return getAverageRating() >= 4.5;
+    }
+    public void restock(int quantity) {
+        stock += quantity;
+        System.out.println("Restocked " + getTitle() + ". New quantity in stock: " + stock);
+    }
 
-        public double getAverageRating() {
-            return averageRating;
-        }
+    @Override
+    public String getMediaType() {
+        return isBestseller() ? "Bestselling Book" : "Book";
+    }
 
-        @Override
+    @Override
         public String toString() {
             return "Book{" +
                     "title='" + getTitle() + '\'' +
@@ -61,8 +62,7 @@ public class Book extends Media {
                     ", ISBN='" + getISBN() + '\'' +
                     ", price=" + getPrice() +
                     ", stock=" + stock +
-                    ", reviews=" + Arrays.toString(reviews) +
-                    ", averageRating=" + averageRating +
+                    ", reviews=" +reviews +
                     '}';
         }
     }

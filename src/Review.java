@@ -1,8 +1,8 @@
-public class Review {
+public class Review extends Media{
     private String username;
     private String comment;
-    private String rating;
-    public Review(String username,String comment,String rating ){
+    private int rating;
+    public Review(String username,String comment,int rating ){
         this.username=username;
         this.comment=comment;
         this.rating=rating;
@@ -25,11 +25,11 @@ public class Review {
         this.comment = comment;
     }
 
-    public String getRating() {
+    public int getRating() {
         return rating;
     }
 
-    public void setRating(String rating) {
+    public void setRating(int rating) {
         this.rating = rating;
     }
 }

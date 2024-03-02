@@ -1,21 +1,22 @@
 import java.util.ArrayList;
+import java.util.List;
 
 public class User {
     private String userName;
     private String email;
-
-  private ArrayList<Media> purchasedMediaList;
     private ArrayList<Media> shoppingCart;
-    private ArrayList<Review> reviews;
+    private ArrayList<Media> purchasedMediaList;
 
+    public User() {
+        this.shoppingCart = new ArrayList<>();
+        this.purchasedMediaList = new ArrayList<>();
+    }
 
-public User(){}
     public User(String userName, String email) {
         this.userName = userName;
         this.email = email;
-        this.shoppingCart=new ArrayList<>();
-        this.reviews=new ArrayList<>();
-        purchasedMediaList=new ArrayList<>();
+        this.shoppingCart = new ArrayList<>();
+        this.purchasedMediaList = new ArrayList<>();
     }
 
     public String getUserName() {
@@ -34,50 +35,37 @@ public User(){}
         this.email = email;
     }
 
-
-    public ArrayList<Media> getPurchasedMediaList() {
-        return purchasedMediaList;
-    }
-
-
-    public ArrayList<Media> getShoppingCart() {
-        return shoppingCart;
-    }
-
-    public void addToCart(Media media){
+    public void addToCart(Media media) {
         shoppingCart.add(media);
-}
-public void removeFromCart(Media media){
+    }
+
+    public void removeFromCart(Media media) {
         shoppingCart.remove(media);
-}
+    }
+
     public void checkout() {
         purchasedMediaList.addAll(shoppingCart);
         shoppingCart.clear();
     }
 
-    public void addToPurchasedMediaList(Movie movie) {
-        shoppingCart.add(movie);
-    }
-    public void leaveReview(Book book, String comment, String rating) {
-        Review review = new Review(userName, comment, rating);
-        book.addReview(review);
-        reviews.add(review);
+    public ArrayList<Media> getPurchasedMediaList() {
+        return purchasedMediaList;
     }
 
-    public double average(Book book) {
-        double sum = 0;
-        int count = 0;
-        if (book.getReviews() != null) {
-            for (Review review : book.getReviews()) {
-                sum += Double.parseDouble(review.getRating());
-                count++;
-            }
-            return count > 0 ? sum / count : 0;
-        }    else {
-            return -1;
-        }
-        }
+    public void setPurchasedMediaList(ArrayList<Media> purchasedMediaList) {
+        this.purchasedMediaList = purchasedMediaList;
+    }
 
+    public List<Media> getShoppingCart() {
+        return shoppingCart;
+    }
+
+    public void addToPurchased(Media media) {
+        purchasedMediaList.add(media);
+    }
+
+    public void setShoppingCart(ArrayList<Media> shoppingCart) {
+        this.shoppingCart = shoppingCart;
+    }
 }
-
 
